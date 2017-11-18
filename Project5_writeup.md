@@ -102,6 +102,7 @@ The other parameters are fixed (same as the ones used in previous paragraph) wit
 | 12      | 0.9879      |  
 | 16     | 0.987      |  
 
+8 pixels per cell provides the highest test accuracy, so I will use `pix_per_cell = 8` for the subsequent investigations. Note that here I am trying to pick up parameters that offer highest accuracy. In case that calculation speed is the top priority, trade-offs can be made to use sub-optimal values with slight performance degradation. Also I did not carry out the rigorous cross experimenting, meaning grid search to find the best possible combinations.
 
 After experimenting with these different combinations of parameters. I decided to use the following set of values:
 
@@ -158,7 +159,7 @@ Next section will talk about how to implement a mechanism to further invalidates
 ### Video Implementation
 
 #### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
-Here's a [link to my video result](./project_video_out.mp4)
+Here's a [link to my video result](./project_video_out_save_laste10_frames.mp4)
 
 
 #### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
@@ -176,6 +177,8 @@ Finally, a image/video processing pipeline is built using the functions/routines
 
 ### Here the resulting bounding boxes are drawn onto the six test images after applying the heatmap generation and false positive filtering using thresholding algorithm:
 ![alt text][image6]
+
+As can be seen from these pictures, no false positives are shown and each box corresponds a car being identified.
 
 Besides defining a heatmap and using different scales for searching. I also implemented a basic list to keep the positive boxes found in previous frames (10 frames) and rejecting the detections that below the threshold, which can be found in code cell 19 and 20.
 ```Python
